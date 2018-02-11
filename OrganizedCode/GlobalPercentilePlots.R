@@ -9,7 +9,7 @@ library(gridExtra) # easy for putting graphs onto the same page (just use ggarra
 # Create plots of 95th vs 50,60,75,80,85-93 percentile
 
 setwd(
-  "~/Documents/UCSC/Junior/Treehouse/OutlierRNAseq_Treehouse_Repo/comp4.3_tert8.ckcc.outlier_results"
+  "~/Documents/UCSC/Junior/Treehouse/Treehouse_OutlierRNASeq/comp4.3_tert8.ckcc.outlier_results"
 )
 
 up_outlier_files = list.files(, "outlier_results_")
@@ -64,8 +64,7 @@ percentileOfEachSampleDf <- outlierResults %>%
   p95p92 <-
     gather(percentileOfEachSampleDf, percentile, sample, p95, p92)
   }
-# # Multiple plot of 50-85
-
+# # Multiple plot of 50-92
 
 {
   nfp = list(p95p50, p95p60, p95p75, p95p85, p95p92)
@@ -88,14 +87,70 @@ percentileOfEachSampleDf <- outlierResults %>%
                    position = 'identity',
                    aes(y = ..density..)) +
       xlab("log2(TPM+1) Pctl Cutoff \nof Each Sample") +
+      ylab("Density of Measurements") +
       scale_y_continuous(limits = c(0, 1.5)) +
       scale_x_continuous(limits = c(0, 6.5))
     ggsave(
       paste0(names[i], "pctlPlot.png"),
       plot = p1,
       "png",
-      "~/Documents/UCSC/Junior/Treehouse/OutlierRNAseq_Treehouse_Repo/GlobalPercentilePlots/"
+      "~/Documents/UCSC/Junior/Treehouse/Treehouse_OutlierRNASeq/GlobalPercentilePlots/",
     )
     
   }
 }
+
+
+ggplot(p95p75, aes(sample, fill = percentile)) +
+  geom_histogram(
+    alpha = 0.5,
+    position = 'identity',
+    aes(y = ..density.., color = percentile),
+    binwidth = 0.1
+  ) +
+  ggtitle("Frequency of Global 75th and 95th Percentile of Each Sample") +
+  geom_density(alpha = 0,
+               position = 'identity',
+               aes(y = ..density..)) +
+  xlab("log2(TPM+1) Pctl Cutoff \nof Each Sample") +
+  ylab("Density of Measurements") +
+  scale_y_continuous(limits = c(0, 1.5)) +
+  scale_x_continuous(limits = c(0, 6.5)) +
+  geom_vline(xintercept = 5.24) + annotate("text", x = 4.4, y = 1, label = "log2(TPM+1) = 5.24")
+
+ggplot(p95p75, aes(sample, fill = percentile)) +
+  geom_histogram(
+    alpha = 0.5,
+    position = 'identity',
+    aes(y = ..density.., color = percentile),
+    binwidth = 0.1
+  ) +
+  ggtitle("Frequency of Global 75th and 95th Percentile of Each Sample") +
+  geom_density(alpha = 0,
+               position = 'identity',
+               aes(y = ..density..)) +
+  xlab("log2(TPM+1) Pctl Cutoff \nof Each Sample") +
+  ylab("Density of Measurements") +
+  scale_y_continuous(limits = c(0, 1.5)) +
+  scale_x_continuous(limits = c(0, 6.5)) +
+  geom_vline(xintercept = 5.24) 
+
+
+
+m <- ggplot(percentileOfEachSampleDf, aes(p95))
+m <- m + geom_density()
+p <- print(m)
+
+head(p$data[[1]]$y)
+sum(p$data[[1]]$y)
+# sum of data is 173.9702
+# I want to divide the points of the density by the sum of all to get a normalized curve that adds to one
+
+normalized <- data.frame(p$data[[1]]$y,p$data[[1]]$x)
+sum(p$data[[1]]$y/sum(p$data[[1]]$y))                                
+# this sum is 1
+
+ggplot(normalized, aes(p$data[[1]]$x, p$data[[1]]$y/sum(p$data[[1]]$y))) + geom_line() +
+  ggtitle("Normalized Density Curve Sum All y = 1") +
+  ylab("Density of Observations") +
+  xlab("log2(TPM+1)")

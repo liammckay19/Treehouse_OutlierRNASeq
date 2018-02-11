@@ -1,6 +1,4 @@
 
-
-
 options(stringsAsFactors = FALSE) # for compatibile code between us
 
 library(tidyverse)
@@ -8,15 +6,16 @@ library(gridExtra) # easy for putting graphs onto the same page (just use ggarra
 # columns, nrow = #row))
 # Create plots of 95th vs 50,60,75,80,85-93 percentile
 
+liamsWorkingDir <- "~/Documents/UCSC/Junior/Treehouse/Treehouse_OutlierRNASeq/comp4.3_tert8.ckcc.outlier_results"
 setwd(
-  "~/Documents/UCSC/Junior/Treehouse/OutlierRNAseq_Treehouse_Repo/comp4.3_tert8.ckcc.outlier_results"
+  liamsWorkingDir
 )
 
-up_outlier_files=list.files(, "outlier_results_")
+up_outlier_files = list.files(, "outlier_results_")
 
-outlierResults<-lapply(up_outlier_files, function(x) {
-  read_tsv(x, col_types=cols()) %>%
-    add_column(sampleID=gsub("outlier_results_", "", x))
+outlierResults <- lapply(up_outlier_files, function(x) {
+  read_tsv(x, col_types = cols()) %>%
+    add_column(sampleID = gsub("outlier_results_", "", x))
 }) 	%>%
   bind_rows()
 
@@ -37,7 +36,7 @@ outlierResults<-lapply(up_outlier_files, function(x) {
   
   percentileOfEachSampleDf <- outlierResults %>%
     group_by(sampleID) %>%
-    summarise( p95 = quantile(sample, c(0.95))) %>%
+    summarise(p95 = quantile(sample, c(0.95))) %>%
     arrange(desc(p95))
   
   percentileOfEachSampleDf_bad_sample <- bad_sample %>%

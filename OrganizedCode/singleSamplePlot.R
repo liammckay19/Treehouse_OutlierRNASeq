@@ -6,8 +6,10 @@ library(gridExtra) # easy for putting graphs onto the same page (just use ggarra
 # columns, nrow = #row))
 
 
-setwd("~/Documents/UCSC/Junior/Treehouse/OutlierRNAseq_Treehouse_Repo/comp4.3_tert8.ckcc.outlier_results")
-
+liamsWorkingDir <- "~/Documents/UCSC/Junior/Treehouse/Treehouse_OutlierRNASeq/comp4.3_tert8.ckcc.outlier_results"
+setwd(
+  liamsWorkingDir
+)
 up_outlier_files=list.files(, "outlier_results_")
 
 outlierResults<-lapply(up_outlier_files, function(x) {

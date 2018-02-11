@@ -8,8 +8,9 @@ library(gridExtra) # easy for putting graphs onto the same page (just use ggarra
 # columns, nrow = #row))
 # Create plots of 95th vs 50,60,75,80,85-93 percentile
 
+liamsWorkingDir <- "~/Documents/UCSC/Junior/Treehouse/Treehouse_OutlierRNASeq/comp4.3_tert8.ckcc.outlier_results"
 setwd(
-  "~/Documents/UCSC/Junior/Treehouse/Treehouse_OutlierRNASeq/comp4.3_tert8.ckcc.outlier_results"
+  liamsWorkingDir
 )
 
 up_outlier_files = list.files(, "outlier_results_")

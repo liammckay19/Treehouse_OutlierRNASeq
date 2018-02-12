@@ -1,0 +1,116 @@
+th_sampleid	disease	dx_group	umendCountPath	umendCountRaw
+TH01_0053_S01	acute myeloid leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH01_0053_S01	68568052.94
+TH01_0054_S01	acute lymphoblastic leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH01_0054_S01	48700462.5
+TH01_0055_S01	glioma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH01_0055_S01	50747617.08
+TH01_0061_S01	germ cell tumor	Germ cell tumor or teratoma	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH01_0061_S01	39796284.705
+TH01_0062_S01	acute lymphoblastic leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH01_0062_S01	67633278.375
+TH01_0063_S01	sarcoma	Sarcoma other (all other types)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH01_0063_S01	81739157.91
+TH01_0064_S01	lymphoma	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH01_0064_S01	40203994.32
+TH01_0069_S01	sarcoma	Sarcoma bone (osteo and Ewing)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH01_0069_S01	18836783.99
+TH01_0120_S01	acute myeloid leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH01_0120_S01	37755839.58
+TH01_0121_S01	acute lymphoblastic leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH01_0121_S01	40578143.81
+TH01_0122_S01	acute lymphoblastic leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH01_0122_S01	48081302
+TH01_0123_S01	acute lymphoblastic leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH01_0123_S01	50835778.56
+TH01_0124_S01	acute lymphoblastic leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH01_0124_S01	44152062.24
+TH01_0125_S01	acute lymphoblastic leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH01_0125_S01	44351458.125
+TH01_0126_S01	acute lymphoblastic leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH01_0126_S01	42034804.66
+TH01_0127_S01	acute lymphoblastic leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH01_0127_S01	51555623.34
+TH01_0128_S01	acute lymphoblastic leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH01_0128_S01	41603342.42
+TH01_0129_S01	acute lymphoblastic leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH01_0129_S01	57922422.87
+TH01_0130_S01	acute lymphoblastic leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH01_0130_S01	44073994.48
+TH01_0131_S01	acute lymphoblastic leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH01_0131_S01	44180277
+TH01_0132_S01	acute myeloid leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH01_0132_S01	48067333.16
+TH01_0133_S01	acute lymphoblastic leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH01_0133_S01	30504521.19
+TH01_0134_S01	acute lymphoblastic leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH01_0134_S01	37815835.365
+TH03_0010_S01	acute leukemia of ambiguous lineage, CNS1	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0010_S01	41477926.62
+TH03_0010_S02	acute leukemia of ambiguous lineage, CNS1	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0010_S02	12032966.765
+TH03_0103_S01	rhabdomyosarcoma	Sarcoma other (all other types)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0103_S01	28840373.6
+TH03_0104_S01	hepatoblastoma	Liver	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0104_S01	41080308.89
+TH03_0105_S01	rhabdomyosarcoma	Sarcoma other (all other types)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0105_S01	50925998.4
+TH03_0106_S01	sarcoma	Sarcoma bone (osteo and Ewing)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0106_S01	33506823.48
+TH03_0107_S01	hepatoblastoma	Liver	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0107_S01	43717275.81
+TH03_0011_S01	acute lymphoblastic leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0011_S01	22661832.165
+TH03_0112_S01	sarcoma	Sarcoma other (all other types)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0112_S01	34642410.4
+TH03_0112_S02	sarcoma	Sarcoma other (all other types)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0112_S02	48871144.715
+TH03_0113_S01	myoepithelial carcinoma of the liver	Liver	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0113_S01	34539181.17
+TH03_0113_S02	myoepithelial carcinoma of the liver	Liver	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0113_S02	29711973.2
+TH03_0114_S01	fibrolamellar hepatocellular carcinoma	Liver	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0114_S01	10497366.74
+TH03_0115_S01	teratoma	Germ cell tumor or teratoma	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0115_S01	40241500.8
+TH03_0116_S01	hepatoblastoma	Liver	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0116_S01	34960221.155
+TH03_0117_S01	glioma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0117_S01	22653240.125
+TH03_0118_S01	acute myeloid leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0118_S01	27399130.59
+TH03_0012_S01	wilms tumor	Wilms & other kidney	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0012_S01	36666762.96
+TH03_0012_S02	wilms tumor	Wilms & other kidney	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0012_S02	40528660.38
+TH03_0013_S01	acute lymphoblastic leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0013_S01	20883770.87
+TH03_0013_S02	acute lymphoblastic leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0013_S02	26152034.8
+TH03_0139_S01	osteosarcoma	Sarcoma bone (osteo and Ewing)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0139_S01	22934900.38
+TH03_0014_S01	sarcoma	Sarcoma bone (osteo and Ewing)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0014_S01	18738948.915
+TH03_0140_S01	osteosarcoma	Sarcoma bone (osteo and Ewing)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0140_S01	28771170.48
+TH03_0141_S01	osteosarcoma	Sarcoma bone (osteo and Ewing)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0141_S01	15282685.495
+TH03_0143_S01	osteosarcoma	Sarcoma bone (osteo and Ewing)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0143_S01	22539888.15
+TH03_0143_S02	osteosarcoma	Sarcoma bone (osteo and Ewing)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0143_S02	48478352.56
+TH03_0144_S01	wilms tumor	Wilms & other kidney	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0144_S01	29079072.36
+TH03_0146_S01	sarcoma	Sarcoma other (all other types)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0146_S01	14038478.32
+TH03_0148_S01	lymphoma	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0148_S01	17333142.06
+TH03_0149_S01	acute myeloid leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0149_S01	23543302.71
+TH03_0015_S01	neuroblastoma	Neuroblastoma/ganglioneuroblastoma	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0015_S01	57507209.2
+TH03_0156_S01	sarcoma	Sarcoma other (all other types)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.3.4/TH03_0156_S01	35449428.4
+TH03_0157_S01	sarcoma	Sarcoma bone (osteo and Ewing)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.3.4/TH03_0157_S01	22520975.535
+TH03_0159_S01	osteosarcoma	Sarcoma bone (osteo and Ewing)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0159_S01	58012833.45
+TH03_0159_S02	osteosarcoma	Sarcoma bone (osteo and Ewing)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0159_S02	24558245.56
+TH03_0016_S01	atypical teratoid/rhabdoid tumor	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0016_S01	40516488.8
+TH03_0160_S01	osteosarcoma	Sarcoma bone (osteo and Ewing)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0160_S01	27352856
+TH03_0017_S01	hepatoblastoma	Liver	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0017_S01	15208878.33
+TH03_0018_S01	sarcoma	Sarcoma other (all other types)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0018_S01	38727582.27
+TH03_0018_S02	sarcoma	Sarcoma other (all other types)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0292_S01	43961801.13
+TH03_0019_S01	fibrolamellar hepatocellular carcinoma	Liver	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0019_S01	16860989.6
+TH03_0020_S01	medulloblastoma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0020_S01	29534953.2
+TH03_0022_S01	osteosarcoma	Sarcoma bone (osteo and Ewing)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0022_S01	19155446.695
+TH03_0024_S01	adrenocortical carcinoma	Other	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0024_S01	10752266.85
+TH03_0025_S02	osteosarcoma	Sarcoma bone (osteo and Ewing)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.3.4/TH03_0025_S02	22768959.2
+TH03_0027_S01	osteosarcoma	Sarcoma bone (osteo and Ewing)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0027_S01	11540237.05
+TH03_0285_S01	juvenile myelomonocytic leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0285_S01	42487217.52
+TH03_0286_S01	hepatocellular carcinoma	Liver	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0286_S01	37962241.59
+TH03_0287_S01	neuroblastoma	Neuroblastoma/ganglioneuroblastoma	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0287_S01	46477492.115
+TH03_0288_S01	neuroblastoma	Neuroblastoma/ganglioneuroblastoma	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0288_S01	25374931.535
+TH03_0289_S01	acute lymphoblastic leukemia	Hematopoietic	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0289_S01	28941134.04
+TH03_0029_S01	osteosarcoma	Sarcoma bone (osteo and Ewing)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0029_S01	17607899.54
+TH03_0290_S01	glioma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0290_S01	22341257.67
+TH03_0291_S01	ependymoma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0291_S01	40598999.81
+TH03_0296_S01	osteosarcoma	Sarcoma bone (osteo and Ewing)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0296_S01	31236946.58
+TH03_0296_S02	osteosarcoma	Sarcoma bone (osteo and Ewing)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0296_S02	37380997.68
+TH03_0003_S01	sarcoma	Sarcoma other (all other types)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0003_S01	30043222.17
+TH03_0003_S03	sarcoma	Sarcoma other (all other types)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0003_S03	56456661.415
+TH03_0003_S04	sarcoma	Sarcoma other (all other types)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0003_S04	38426827.67
+TH03_0038_S01	osteosarcoma	Sarcoma bone (osteo and Ewing)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.3.4/TH03_0038_S01	26617546.8
+TH03_0004_S02	hepatoblastoma	Liver	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0004_S02	50674702
+TH03_0004_S03	hepatoblastoma	Liver	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0004_S03	17986551.18
+TH03_0004_S04	hepatoblastoma	Liver	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0004_S04	21513050.52
+TH03_0005_S01	nasopharyngeal carcinoma	Other	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0005_S01	21582544.22
+TH03_0006_S01	rhabdomyosarcoma	Sarcoma other (all other types)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0006_S01	13493051.78
+TH03_0006_S03	rhabdomyosarcoma	Sarcoma other (all other types)	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0006_S03	32635418
+TH02_0074_S01	glioblastoma multiforme	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH02_0074_S01	66977926.85
+TH02_0075_S01	glioblastoma multiforme	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH02_0075_S01	47781010.475
+TH02_0076_S01	glioblastoma multiforme	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH02_0076_S01	68708510.01
+TH02_0077_S01	glioma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH02_0077_S01	41756809.8
+TH02_0078_S01	glioma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH02_0078_S01	42035863.23
+TH02_0079_S01	glioma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH02_0079_S01	31569977.61
+TH03_0008_S01	neuroblastoma	Neuroblastoma/ganglioneuroblastoma	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH03_0008_S01	29692417.415
+TH02_0080_S01	glioma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH02_0080_S01	37281580.5
+TH02_0081_S01	glioblastoma multiforme	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH02_0081_S01	39063557.7
+TH02_0082_S01	diffuse intrinsic pontine glioma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH02_0082_S01	49129845.765
+TH02_0083_S01	diffuse intrinsic pontine glioma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH02_0083_S01	53168714.98
+TH02_0084_S01	diffuse intrinsic pontine glioma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH02_0084_S01	37045095.935
+TH02_0085_S01	diffuse intrinsic pontine glioma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH02_0085_S01	42212890.59
+TH02_0086_S01	diffuse intrinsic pontine glioma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH02_0086_S01	25591868.25
+TH02_0087_S01	diffuse intrinsic pontine glioma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH02_0087_S01	53853360.21
+TH02_0087_S02	diffuse intrinsic pontine glioma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH02_0087_S02	83737576.615
+TH02_0088_S01	diffuse intrinsic pontine glioma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH02_0088_S01	33613320.4
+TH02_0089_S01	diffuse intrinsic pontine glioma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH02_0089_S01	49435568.91
+TH02_0090_S01	diffuse intrinsic pontine glioma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH02_0090_S01	51325811.075
+TH02_0091_S01	diffuse intrinsic pontine glioma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH02_0091_S01	47019332.3
+TH02_0092_S01	diffuse intrinsic pontine glioma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH02_0092_S01	62305304.625
+TH02_0093_S01	diffuse intrinsic pontine glioma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH02_0093_S01	68913768.74
+TH02_0094_S01	diffuse intrinsic pontine glioma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH02_0094_S01	41058735.025
+TH02_0095_S01	diffuse intrinsic pontine glioma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH02_0095_S01	48759827.655
+TH02_0096_S01	diffuse intrinsic pontine glioma	CNS	/pod/pstoreold/groups/treehouse/backed_up/archive/output3.2.1/TH02_0096_S01	11672399.97

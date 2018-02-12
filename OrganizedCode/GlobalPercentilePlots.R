@@ -119,23 +119,19 @@ ggplot(p95p75, aes(sample, fill = percentile)) +
   scale_x_continuous(limits = c(0, 6.5)) +
   geom_vline(xintercept = 5.24) + annotate("text", x = 4.4, y = 1, label = "log2(TPM+1) = 5.24")
 
-ggplot(p95p75, aes(sample, fill = percentile)) +
+ggplot(percentileOfEachSampleDf, aes(p95)) +
   geom_histogram(
     alpha = 0.5,
     position = 'identity',
-    aes(y = ..density.., color = percentile),
+    aes(y = ..density..),
     binwidth = 0.1
   ) +
-  ggtitle("Frequency of Global 75th and 95th Percentile of Each Sample") +
+  ggtitle("Frequency of Global 95th Percentile in Each Sample") +
   geom_density(alpha = 0,
                position = 'identity',
                aes(y = ..density..)) +
-  xlab("log2(TPM+1) Pctl Cutoff \nof Each Sample") +
-  ylab("Density of Measurements") +
-  scale_y_continuous(limits = c(0, 1.5)) +
-  scale_x_continuous(limits = c(0, 6.5)) +
-  geom_vline(xintercept = 5.24) 
-
+  xlab("95th Percentile") +
+  ylab("Density of Measurements")
 
 
 m <- ggplot(percentileOfEachSampleDf, aes(p95))

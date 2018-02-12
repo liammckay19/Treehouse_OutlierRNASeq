@@ -1,5 +1,6 @@
 
-
+# IDEA
+# plot the line on the second maximum of the distribution to get numerical data of the bump
 
 options(stringsAsFactors = FALSE) # for compatibile code between us
 
@@ -50,7 +51,7 @@ ggplot(worstSamples, aes(sample, color = sampleID)) +
     nfpDF %>% filter(nfp < fifteenth) %>% arrange(desc(nfp))
   
   thisSample <- NULL
-  order <- 100
+  order <- 0
   for (thisSample in worst15pctSamples$sampleID) {
     print(thisSample)
     df <- outlierResults %>% filter(sampleID == thisSample)
@@ -62,14 +63,21 @@ ggplot(worstSamples, aes(sample, color = sampleID)) +
       scale_y_continuous(limits = c(0, 2000))
     
     ggsave(
-      paste0("_num:", order, thisSample, ".png"),
+      paste0(
+        order + 100,
+        "_",
+        round(worst15pctSamples[[2]][order], digits = 3),
+        "_",
+        thisSample,
+        ".png"
+      ),
       plot = p,
       "png",
       paste0(liamsWorkingDir, "WorstPercentilePlots")
     )
     
   }
-  }
+}
 
 
 
@@ -77,27 +85,38 @@ ggplot(worstSamples, aes(sample, color = sampleID)) +
 # saves plots for all sample files on the high end of the 95th percentile
 {
   nfpDF <-
-    outlierResults %>% group_by(sampleID) %>% summarize(p95 = quantile(sample, 0.95))
+    outlierResults %>% group_by(sampleID) %>% summarize(nfp = quantile(sample, 0.95))
   
-  p85 = quantile(nfpDF$p95, 0.85)
+  p85 = quantile(nfpDF$nfp, 0.85)
+  
   best85pctSamples <-
-    nfpDF %>% filter(nfp < p85) %>% arrange(desc(nfp))
-  
+    nfpDF %>% filter(nfp > p85) %>% arrange(desc(nfp))
+  order <- 0
   thisSample <- NULL
   for (thisSample in best85pctSamples$sampleID) {
     print(thisSample)
+    thisSample <- best85pctSamples[[1]][1]
     df <- outlierResults %>% filter(sampleID == thisSample)
+    
     
     p <- ggplot(df) +
       geom_histogram(aes(sample), binwidth = 0.1) +
       ggtitle(thisSample) +
       scale_x_continuous(limits = c(0, 20)) +
-      scale_y_continuous(limits = c(0, 2000))
-    
-    ggsave(paste0(thisSample, ".png"),
-           plot = p,
-           "png",
-           paste0(liamsWorkingDir, "BestPercentilePlots"))
-    
+      scale_y_continuous(limits = c(0, 2000)) 
+    order = order + 1
+    ggsave(
+      paste0(
+        order + 100,
+        "_",
+        round(best85pctSamples[[2]][order], digits = 3),
+        "_",
+        thisSample,
+        ".png"
+      ),
+      plot = p,
+      "png",
+      paste0(liamsWorkingDir, "BestPercentilePlots")
+    )
   }
 }

@@ -7,7 +7,7 @@ library(gridExtra) # easy for putting graphs onto the same page (just use ggarra
 # columns, nrow = #row))
 
 
-setwd("~/Documents/UCSC/Junior/Treehouse/OutlierRNAseq_Treehouse_Repo/comp4.3_tert8.ckcc.outlier_results")
+setwd("~/Documents/UCSC/Junior/Treehouse/Treehouse_outlierRNASeq/comp4.3_tert8.ckcc.outlier_results")
 
 up_outlier_files=list.files(, "outlier_results_")
 
@@ -24,7 +24,7 @@ dfZerosOrNotZeros <- outlierResults %>%
 
 dfZeros <- dfZerosOrNotZeros %>%
   group_by(sampleID) %>%
-  filter(`sample == 0` == T)
+  filter(`sample == 0` == F)
 
 p95df <- outlierResults %>% group_by(sampleID) %>% summarize(p95 = quantile(sample, 0.95))
 
@@ -32,8 +32,28 @@ dfZeros$p95 = p95df$p95
 
 dfScatter <- dfZeros
 ggplot(dfScatter, aes(n/1000, p95)) + geom_point() + 
-  xlab('Unexpressed Genes per Thousand') + ylab('95th Percentile of Sample') +
-  ggtitle('Each Sample\'s Count of Unexpressed Genes and its 95th Percentile') +
-  geom_smooth(method = 'lm')
+  xlab('Expressed Genes per Thousand') + ylab('95th Percentile of Sample') +
+  ggtitle('Each Sample\'s Count of Expressed Genes and its 95th Percentile') +
+  geom_smooth(method = 'lm')+
+  annotate(
+    "text",
+    x = 35,
+    y = 3 ,
+    label = paste0(
+      "correlation: ",
+      round(cor(dfScatter$n,dfScatter$p95),3)
+    )
+  )
 
+cor(dfScatter$n,dfScatter$p95)
+# 0.08755389
+# about 8.8% correlation
 
+# REFERENCE
+x <- seq(1,5)
+y <- x
+df = data.frame(x,y)
+
+cor(x,y)
+ggplot(df, aes(x,y)) + geom_point() + ggtitle("Correlation of 1")
+# correlation of 1 (when x = y)

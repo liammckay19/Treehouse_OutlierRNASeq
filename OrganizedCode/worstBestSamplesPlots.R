@@ -1,4 +1,5 @@
 
+
 # IDEA
 # plot the line on the second maximum of the distribution to get numerical data of the bump
 
@@ -54,7 +55,9 @@ ggplot(worstSamples, aes(sample, color = sampleID)) +
   order <- 0
   for (thisSample in worst15pctSamples$sampleID) {
     print(thisSample)
-    df <- outlierResults %>% filter(sampleID == thisSample)
+    df <-
+      outlierResults %>% filter(sampleID == thisSample) %>% filter(sample > 2)
+    break
     order = order + 1
     p <- ggplot(df) +
       geom_histogram(aes(sample), binwidth = 0.1) +
@@ -77,7 +80,7 @@ ggplot(worstSamples, aes(sample, color = sampleID)) +
     )
     
   }
-}
+  }
 
 
 
@@ -103,7 +106,7 @@ ggplot(worstSamples, aes(sample, color = sampleID)) +
       geom_histogram(aes(sample), binwidth = 0.1) +
       ggtitle(thisSample) +
       scale_x_continuous(limits = c(0, 20)) +
-      scale_y_continuous(limits = c(0, 2000)) 
+      scale_y_continuous(limits = c(0, 2000))
     order = order + 1
     ggsave(
       paste0(

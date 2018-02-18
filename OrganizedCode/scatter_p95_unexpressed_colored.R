@@ -1,4 +1,4 @@
-# plot 95th percentile per sample vs .# unexpressed genes and color the points by whether the smaple ID starts with "TH01".
+# plot 95th percentile per sample vs .# Expressed genes and color the points by whether the smaple ID starts with "TH01".
 
 # scatterplot 
 
@@ -20,24 +20,37 @@ outlierResults<-lapply(up_outlier_files, function(x) {
 }) 	%>%
   bind_rows()
 
-dfZerosOrNotZeros <- outlierResults %>%
+dfNotZerosOrNotZeros <- outlierResults %>%
   select(sampleID, sample) %>%
   group_by(sampleID) %>%
   count(sample == 0) 
 
-dfZeros <- dfZerosOrNotZeros %>%
+dfNotZeros <- dfNotZerosOrNotZeros %>%
   group_by(sampleID) %>%
-  filter(`sample == 0` == T)
+  filter(`sample == 0` == F)
 
 p95df <- outlierResults %>% group_by(sampleID) %>% summarize(p95 = quantile(sample, 0.95))
 
-dfZeros$p95 = p95df$p95
+dfNotZeros$p95 = p95df$p95
 
-dfZeros$TH01 = grepl("TH01", p95df$sampleID)
-dfScatter <- dfZeros 
-ggplot(dfScatter, aes(p95,n/1000)) + geom_point() + 
-  ylab('Unexpressed Genes per Thousand') + xlab('95th Percentile per Sample') +
-  ggtitle('Each Sample\'s Count of Unexpressed Genes and its 95th Percentile') +
-  geom_smooth(method = 'lm')
-
+dfNotZeros$TH01 = grepl("TH01", p95df$sampleID)
+dfTH01s <- dfNotZeros %>% filter(TH01 == T)
+dfNotTH01s <- dfNotZeros %>% filter(TH01 == F)
+dfScatter <- dfNotZeros 
+ggplot(dfScatter,aes(p95,n/1000, fill = TH01)) + geom_point(aes(p95,n/1000, color = TH01)) + 
+  ylab('Expressed Genes per Thousand') + xlab('95th Percentile per Sample') +
+  ggtitle('Each Sample\'s Count of Expressed Genes and its 95th Percentile') +
+  geom_smooth(method = 'lm', aes(color = TH01))+
+  annotate(
+    "text",
+    x = 3,
+    y = 35 ,
+    label = paste0(
+      "correlation TH01: ",
+      round(cor(dfTH01s$n,dfTH01s$p95),3),
+      "\ncorrelation Not TH01: ",
+      round(cor(dfNotTH01s$n,dfNotTH01s$p95),3)
+      
+    )
+  )
 

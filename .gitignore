@@ -7,3 +7,4 @@ ckcc_rsem_genes_results/*
 BadGraphs/*
 TestCode/*
 .Rproj.user
+.RData

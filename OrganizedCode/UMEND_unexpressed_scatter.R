@@ -44,14 +44,9 @@ umendNonZerosDF <- dfNonZeros %>%
 
 ggplot(umendNonZerosDF, aes(n/1000, rawUMEND)) + geom_point() +
   xlab("Thousands of Expressed Genes Per Sample") + ylab("Raw UMEND Count") +
-  geom_smooth(method = 'lm') +
+  geom_smooth(method = 'lm', level = 0.95) +
   ggtitle("Number of Expressed Genes verses UMEND Reads Per Sample") +
-  annotate(
-    "text",
+  annotate("text",
     x = 23.5,
     y = 7e+07,
-    label = paste0(
-      "correlation: ",
-      round(cor(umendNonZerosDF$rawUMEND,umendNonZerosDF$n),3)
-    )
-  )
+    label = paste0("correlation: ",round(cor(umendNonZerosDF$rawUMEND,umendNonZerosDF$n),3),"\nconfidence = 0.95"))

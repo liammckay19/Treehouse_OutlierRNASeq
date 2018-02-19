@@ -41,14 +41,10 @@ UMENDp95DF <- outlierResults %>%
 
 ggplot(UMENDp95DF, aes(p95, rawUMEND)) + geom_point() +
   ylab("Raw UMEND Count") + xlab("95th Percentile Per Sample") + 
-  geom_smooth(method = 'lm') +
+  geom_smooth(method = 'lm', level = 0.95, se = TRUE) +
   ggtitle("95th Percentile verses UMEND Reads Per Sample") + 
-  annotate(
-    "text",
+  annotate("text",
     x = 3,
     y = 7e+07,
-    label = paste0(
-      "correlation: ",
-      round(cor(UMENDp95DF$rawUMEND,UMENDp95DF$p95),3)
-    )
-  )
+    label = paste0("correlation: ",round(cor(UMENDp95DF$rawUMEND,UMENDp95DF$p95),3),"\nconfidence = 0.95"))
+

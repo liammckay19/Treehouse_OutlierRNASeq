@@ -55,4 +55,3 @@ ggplot(umendNonZerosDF, aes(n/1000, rawUMEND)) + geom_point() +
       round(cor(umendNonZerosDF$rawUMEND,umendNonZerosDF$n),3)
     )
   )
-

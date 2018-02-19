@@ -20,7 +20,9 @@ umendResults <- lapply(umend_file, function(x) {
 
 # plot # Expressed genes vs UMEND reads per sample;
 
+
 setwd(paste0(liamsWorkingDir, "comp4.3_tert8.ckcc.outlier_results"))
+
 
 up_outlier_files = list.files(, "outlier_results_")
 
@@ -44,7 +46,7 @@ umendNonZerosDF <- dfNonZeros %>%
 
 ggplot(umendNonZerosDF, aes(n/1000, rawUMEND)) + geom_point() +
   xlab("Thousands of Expressed Genes Per Sample") + ylab("Raw UMEND Count") +
-  geom_smooth(method = 'lm') +
+  geom_smooth(method = 'lm', level = 0) +
   ggtitle("Number of Expressed Genes verses UMEND Reads Per Sample") +
   annotate(
     "text",

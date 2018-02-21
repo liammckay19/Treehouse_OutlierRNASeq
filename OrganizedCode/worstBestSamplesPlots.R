@@ -24,12 +24,6 @@ outlierResults <- lapply(up_outlier_files, function(x) {
 	bind_rows()
 
 
-ggplot(outlierResults %>% filter(sampleID == worst15pctSamples$sampleID), aes(sample)) +
-	geom_histogram(binwidth=0.1) +
-	facet_wrap(~ sampleID) + 
-	scale_y_continuous(limits = c(0,50))
-	scale_x_continuous(limits = c(0,12))
-
 # saves plots and bumps for 22 sample files on the low end of the 95th percentile
 {
 	nfpDF <-
@@ -93,6 +87,13 @@ ggplot(outlierResults %>% filter(sampleID == worst15pctSamples$sampleID), aes(sa
 }
 	# average bump = 2.638889
 
+ggplot(outlierResults %>% filter(sampleID == worst15pctSamples$sampleID), aes(sample)) +
+	geom_histogram(binwidth=0.1) +
+	facet_wrap(~ sampleID) + 
+	scale_y_continuous(limits = c(0,50)) + 
+	scale_x_continuous(limits = c(0,10)) +
+	ylab("Frequency of Sample") + xlab("log2(TPM+1)") + ggtitle("22 Crummy Sample's TPM Frequency")
+ggsave("22 Crummy Sample's TPM Frequency", plot=p1, "png", width = 10, height = 10, path = liamsWorkingDir)
 # saves plots and bumps for 22 sample files on the high end of the 95th percentile
 {
 	nfpDF <-
@@ -152,6 +153,13 @@ ggplot(outlierResults %>% filter(sampleID == worst15pctSamples$sampleID), aes(sa
 	print(averageBump)
 }
 	# average bump is 4.104545
+
+ggplot(outlierResults %>% filter(sampleID == best85pctSamples$sampleID), aes(sample)) +
+	geom_histogram(binwidth=0.1) +
+	facet_wrap(~ sampleID) + 
+	scale_y_continuous(limits = c(0,50)) + 
+	scale_x_continuous(limits = c(0,10)) +
+	ylab("Frequency of Sample") + xlab("log2(TPM+1)") + ggtitle("22 Best Sample's TPM Frequency")
 
 # every sample in the dataset's bump plotted and saved: 
 {

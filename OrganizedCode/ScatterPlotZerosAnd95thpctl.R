@@ -31,14 +31,14 @@ p95df <- outlierResults %>% group_by(sampleID) %>% summarize(p95 = quantile(samp
 dfZeros$p95 = p95df$p95
 
 dfScatter <- dfZeros
-ggplot(dfScatter, aes(n/1000, p95)) + geom_point() + 
-  xlab('Expressed Genes per Thousand') + ylab('95th Percentile of Sample') +
+ggplot(dfScatter, aes( p95,n/1000)) + geom_point() + 
+  ylab('Expressed Genes per Thousand') + xlab('95th Percentile of Sample') +
   ggtitle('Each Sample\'s Count of Expressed Genes and its 95th Percentile') +
   geom_smooth(method = 'lm')+
   annotate(
     "text",
-    x = 35,
-    y = 3 ,
+    x = 3,
+    y = 35 ,
     label = paste0(
       "correlation: ",
       round(cor(dfScatter$n,dfScatter$p95),3)

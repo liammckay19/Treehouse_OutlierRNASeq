@@ -38,6 +38,8 @@ outlierResults <- lapply(up_outlier_files, function(x) {
 	sumBump <- 0
 	countBump <- 0 
 	averageBump <- 0 
+
+	x <- list()
 	for (thisSample in worst15pctSamples$sampleID) {
 		print(thisSample)
 		df <-
@@ -66,6 +68,7 @@ outlierResults <- lapply(up_outlier_files, function(x) {
 			sumBump = sumBump + dfn[which.max(dfn$n),]$sample
 			countBump = countBump + 1
 		}
+	}
 
 		ggsave(
 			paste0(
@@ -186,6 +189,7 @@ ggplot(outlierResults %>% filter(sampleID == best85pctSamples$sampleID), aes(sam
 			scale_x_continuous(limits = c(0, 20)) +
 			scale_y_continuous(limits = c(0, 2000)) 
 
+
 		if(dfn[which.max(dfn$n),]$sample > 1.9) {
 			p = p + annotate(
 					"text",
@@ -194,12 +198,12 @@ ggplot(outlierResults %>% filter(sampleID == best85pctSamples$sampleID), aes(sam
 					label = paste0(
 						"bump: ",
 						dfn[which.max(dfn$n),]$sample
-
 					)
 				) + geom_vline(xintercept = dfn[which.max(dfn$n),]$sample)
 			sumBump = sumBump + dfn[which.max(dfn$n),]$sample
 			countBump = countBump + 1
 		}
+	}
 
 		order = order + 1
 		ggsave(

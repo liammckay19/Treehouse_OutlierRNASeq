@@ -20,6 +20,57 @@ outlierResults<-lapply(up_outlier_files, function(x) {
 }) 	%>%
   bind_rows()
 
+
+# every sample in the dataset's bump plotted and saved: 
+{
+	nfpDF <-
+		outlierResults %>% group_by(sampleID) %>% summarize(nfp = quantile(sample, 0.95))
+	
+	p85 = quantile(nfpDF$nfp, 0.85)
+	sumBump <- 0
+	countBump <- 0
+	averageBump <- 0
+	allSamples <-
+		nfpDF %>% arrange(desc(nfp))
+	order <- 0
+	thisSample <- NULL
+	i <- 0
+	for (thisSample in allSamples$sampleID) {
+		print(thisSample)
+		df <- outlierResults %>% filter(sampleID == thisSample) %>% filter(sample > 1.8)
+		dfn <- count(df, sample=round(sample,1))
+		dfn$index <- seq(1,length(dfn$n))
+
+		# p <- ggplot(outlierResults %>% filter(sampleID == thisSample)) +
+		# 	geom_histogram(aes(sample), binwidth = 0.1) +
+		# 	ggtitle(thisSample) +
+		# 	scale_x_continuous(limits = c(0, 20)) +
+		# 	scale_y_continuous(limits = c(0, 2000)) 
+
+
+		if(dfn[which.max(dfn$n),]$sample > 1.9) { # gets the highest count
+			allSamples$bump[i] <- TRUE
+			# p = p + annotate(
+			# 		"text",
+			# 		x = dfn[which.max(dfn$n),]$sample+3,
+			# 		y = 1000,
+			# 		label = paste0(
+			# 			"bump: ",
+			# 			dfn[which.max(dfn$n),]$sample
+			# 		)
+			# 	) + geom_vline(xintercept = dfn[which.max(dfn$n),]$sample)
+			sumBump = sumBump + dfn[which.max(dfn$n),]$sample
+			countBump = countBump + 1
+		} else {
+			allSamples$bump[i] <- FALSE
+		}
+		i <- i + 1
+	}
+	averageBump = sumBump / countBump
+	print(averageBump)
+}
+	# average bump = 3.344928
+
 dfNotZerosOrNotZeros <- outlierResults %>%
   select(sampleID, sample) %>%
   group_by(sampleID) %>%
@@ -40,8 +91,9 @@ dfNotTH01s <- dfNotZeros %>% filter(TH01 == F)
 
 dfNotZeros$TH01 <- gsub("TRUE", "TH01_...",dfNotZeros$TH01)
 dfNotZeros$TH01 <- gsub("FALSE", "Not TH01_...",dfNotZeros$TH01)
-dfScatter <- dfNotZeros 
 
+
+dfScatter <- dfNotZeros 
 colnames(dfScatter)[which(names(dfScatter) == "TH01")] <- "Sample_Name"
 
 ggplot(dfScatter,aes(n/1000,p95, fill = Sample_Name)) + 
@@ -63,5 +115,8 @@ ggplot(dfScatter,aes(n/1000,p95, fill = Sample_Name)) +
       
     )
   )
+
+
+
 
 

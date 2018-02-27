@@ -168,18 +168,19 @@ ggplot(outlierResults %>% filter(sampleID == best85pctSamples$sampleID), aes(sam
 {
 	nfpDF <-
 		outlierResults %>% group_by(sampleID) %>% summarize(nfp = quantile(sample, 0.95))
-	
+
 	p85 = quantile(nfpDF$nfp, 0.85)
 	sumBump <- 0
 	countBump <- 0
 	averageBump <- 0
 	allSamples <-
 		nfpDF %>% arrange(desc(nfp))
-	order <- 0
+	order <- 1
 	thisSample <- NULL
 	for (thisSample in allSamples$sampleID) {
 		print(thisSample)
 		df <- outlierResults %>% filter(sampleID == thisSample) %>% filter(sample > 1.8)
+		thisp95 <- round(allSamples[[2]][order], digits = 3)
 		dfn <- count(df, sample=round(sample,1))
 		dfn$index <- seq(1,length(dfn$n))
 
@@ -191,21 +192,16 @@ ggplot(outlierResults %>% filter(sampleID == best85pctSamples$sampleID), aes(sam
 
 
 		if(dfn[which.max(dfn$n),]$sample > 1.9) {
-			p = p + annotate(
-					"text",
-					x = dfn[which.max(dfn$n),]$sample+3,
-					y = 1000,
-					label = paste0(
-						"bump: ",
-						dfn[which.max(dfn$n),]$sample
-					)
-				) + geom_vline(xintercept = dfn[which.max(dfn$n),]$sample)
+			p = p + annotate("text",x = dfn[which.max(dfn$n),]$sample,y = 1000,label = paste0("bump: ",dfn[which.max(dfn$n),]$sample)) +
+					geom_vline(xintercept = dfn[which.max(dfn$n),]$sample) +
+					annotate("text",x = thisp95+4,y = 1000,label = paste0(	"p95 of me: ",thisp95)) +
+					geom_vline(xintercept = thisp95)
 			sumBump = sumBump + dfn[which.max(dfn$n),]$sample
 			countBump = countBump + 1
 		}
-	}
 
-		order = order + 1
+
+		order <- order + 1
 		ggsave(
 			paste0(
 				order + 1000,
@@ -217,7 +213,7 @@ ggplot(outlierResults %>% filter(sampleID == best85pctSamples$sampleID), aes(sam
 			),
 			plot = p,
 			"png",
-			paste0(liamsWorkingDir, "bumpPlots")
+			paste0(liamsWorkingDir, "bumpPlotsp95")
 		)
 	}
 	averageBump = sumBump / countBump

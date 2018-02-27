@@ -32,7 +32,7 @@ dfZeros$p95 = p95df$p95
 
 dfScatter <- dfZeros
 ggplot(dfScatter, aes( p95,n/1000)) + geom_point() + 
-  ylab('Expressed Genes per Thousand') + xlab('95th Percentile of Sample') +
+  ylab('Expressed Genes (Thousands)') + xlab('95th Percentile of Sample') +
   ggtitle('Each Sample\'s Count of Expressed Genes and its 95th Percentile') +
   geom_smooth(method = 'lm')+
   annotate(

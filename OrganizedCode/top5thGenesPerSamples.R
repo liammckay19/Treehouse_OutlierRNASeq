@@ -24,3 +24,48 @@ outlierResults<-lapply(up_outlier_files, function(x) {
 
 dfTopFiveGenes <- outlierResults %>%
 	filter(sample > quantile(sample, 0.95))
+
+
+sampleList <- dfTopFiveGenes %>%
+	select(sampleID,sample) %>%
+	group_by(sampleID) %>%
+	summarize()
+
+for (thisSample in sampleList$sampleID) {
+	print(thisSample)
+	dfi <- dfTopFiveGenes %>% filter(sampleID == thisSample)
+
+	maxGene <- max(dfi$sample)
+	varSample <- var(dfi$sample)
+	maxVarGene<-dfi[which.max(dfi$sample),]$Gene
+	variationOfMax <- round(maxGene- mean(dfi$sample),3)*1000
+
+	p <- ggplot(dfTopFiveGenes %>% filter(sampleID == thisSample)) +
+		geom_histogram(aes(sample), binwidth = 0.1) +
+		ggtitle(
+			paste0("mGene:",
+			maxVarGene,
+			" var:",
+			varSample,
+			" ",
+			thisSample
+		)) +
+		xlab("log2(TPM+1)") + 
+		ylab("Gene Expression") +
+		scale_x_continuous(limits = c(5,15)) +
+		scale_y_continuous(limits = c(0,300))
+
+	ggsave(
+		paste0("Var_",
+			varSample,
+			"-",
+			thisSample,
+			".png"
+		),
+		plot = p,
+		"png",
+		paste0(liamsWorkingDir, "Batch-top5-sample-histograms")
+	)
+
+}
+

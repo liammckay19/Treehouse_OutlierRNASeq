@@ -1,6 +1,8 @@
 # just plot genes in the top 5th of each samples, consider the shape of those distnrutions
 
 # top5thGenesPerSamples.R
+
+
 options(stringsAsFactors=FALSE) # for compatibile code between us
 
 library(tidyverse)
@@ -18,3 +20,7 @@ outlierResults<-lapply(up_outlier_files, function(x) {
     add_column(sampleID=gsub("outlier_results_", "", x))
 }) 	%>%
   bind_rows()
+
+
+dfTopFiveGenes <- outlierResults %>%
+	filter(sample > quantile(sample, 0.95))

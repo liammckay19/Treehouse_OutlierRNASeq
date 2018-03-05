@@ -241,3 +241,14 @@ ggplot(dfSamples %>% filter(sampleID == best85pctSamples$sampleID), aes(sample))
 	ggtitle(paste0("Samples > p85 | maxGene: ", maxVarGene, " | Distance From Mean: ", variationOfMax)) +
 	xlab("log2(TPM+1)") + ylab("Gene Expression")+
 	facet_wrap(~ sampleID)
+
+dfBadSamples <- dfSamples %>% filter(sampleID == worst15pctSamples$sampleID)
+maxGene <- max(dfBadSamples$sample)
+maxVarGene<-dfBadSamples[which.max(dfBadSamples$sample),]$Gene
+variationOfMax <- round(maxGene- mean(dfBadSamples$sample),3) 
+
+ggplot(dfBadSamples, aes(sample)) +
+	geom_histogram(binwidth=0.1) +
+	ggtitle(paste0("Samples < p15 | maxGene: ", maxVarGene, " | Distance From Mean: ", variationOfMax)) +
+	xlab("log2(TPM+1)") + ylab("Gene Expression")+
+	facet_wrap(~ sampleID)

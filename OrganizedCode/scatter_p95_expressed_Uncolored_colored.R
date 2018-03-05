@@ -105,7 +105,7 @@ dfScatter$Bump_Value  <- allSamples[[4]]
 ggplot(dfScatter,aes(n/1000,p95, color = Sample_Name)) + 
   scale_colour_brewer(type = "seq", palette = "Set1", direction = 1)+
   scale_fill_brewer(type = "seq", palette = "Set1", direction = 1)+
-  geom_point(aes(shape=Has_Bump, alpha=Bump_Value)) +
+  geom_point(aes(shape=Has_Bump)) +
   scale_size_continuous(range = c(1,6))+
   xlab('Expressed Genes (Thousands)') + ylab('95th Percentile per Sample') +
   ggtitle('Each Sample\'s Count of Expressed Genes and its 95th Percentile') +
@@ -140,7 +140,7 @@ ggplot(dfScatter,aes(n/1000,p95)) +
       
     )
   ) +
-  ylab('Expressed Genes (Thousands)') + xlab('95th Percentile per Sample') +
+  xlab('Expressed Genes (Thousands)') + lab('95th Percentile per Sample') +
   ggtitle('Each Sample\'s Count of Expressed Genes and its 95th Percentile') 
 
 

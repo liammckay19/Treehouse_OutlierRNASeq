@@ -54,30 +54,57 @@ quantile(dfGeneVar$variation, 0.95)
 geneList <- dfGeneVar %>% filter(variation > quantile(dfGeneVar$variation, 0.95))
 # get names of genes p95 of variation and up
 
+dfPercentile <- outlierResults %>%
+	group_by(sampleID) %>%
+	summarize(p95 = quantile(sample, 0.95))
 
 dfSamples <-
 		outlierResults %>% group_by(sampleID) %>% filter(Gene %in% geneList$Gene)
 	# match names to all of their th01 th02 etc...
+
+dfSamples$TH01 <- grepl(pattern = 'TH01', dfSamples$sampleID)
+dfSamples$TH01 <- gsub('TRUE', 'blue',dfSamples$TH01)
+dfSamples$TH01 <- gsub('FALSE', 'red',dfSamples$TH01)
+
 
 sampleList <- dfSamples %>%
 	select(sampleID,sample) %>%
 	group_by(sampleID) %>%
 	summarize()
 
+
 for (thisSample in sampleList$sampleID) {
 	print(thisSample)
 	dfi <- dfSamples %>% filter(sampleID == thisSample)
-	p <- ggplot(dfSamples %>% filter(sampleID == thisSample)) +
+	dfp <- dfPercentile %>% filter(sampleID == thisSample)
+	dfc <- dfSamples %>% group_by(TH01) %>% filter(sampleID == thisSample) %>% summarize()
+	print(dfc[1][[1]])
+	ggplot(dfSamples %>% filter(sampleID == thisSample)) +
 		geom_histogram(aes(sample), binwidth = 0.1) +
+		scale_fill_manual(values = c('red')) +
 		ggtitle(thisSample) +
-		xlab("log2(TPM+1)") + ylab("Gene Expression")
+		xlab("log2(TPM+1)") + ylab("Gene Expression") +
+		scale_x_continuous(limits = c(0,20)) +
+		scale_y_continuous(limits = c(0,200)) +
+		geom_vline(xintercept = dfp$p95) +
+		annotate(
+					"text",
+					x = round(dfp$p95,4)+4.3,
+					y = 150,
+					label = paste0(
+						"glp95: ",
+						round(dfp$p95,4)
+					)
+				) 
+
 	maxGene <- max(dfi$sample)
 	maxVarGene<-dfi[which.max(dfi$sample),]$Gene
 	variationOfMax <- round(maxGene- mean(dfi$sample),3) 
 	ggsave(
 		paste0(
-			maxVarGene,
-			"-",
+			"pctl=",
+			format(round(dfp$p95,4),nsmall = 4),
+			"-var=",
 			variationOfMax,
 			"-",
 			thisSample,
@@ -85,7 +112,7 @@ for (thisSample in sampleList$sampleID) {
 		),
 		plot = p,
 		"png",
-		paste0(liamsWorkingDir, "MostVariantGenes")
+		paste0(liamsWorkingDir, "Batch-MostVariantGenesSorted-by-p95")
 	)
 
 }
@@ -195,7 +222,8 @@ for (thisSample in sampleList$sampleID) {
 			ggtitle(paste0(thisSample,"> p85\n maxGene: ", maxVarGene)) +
 			scale_x_continuous(limits = c(0,20))+
 			scale_y_continuous(limits = c(0,300))+
-			xlab("log2(TPM+1)") + ylab("Gene Expression")
+			xlab("log2(TPM+1)") + ylab("Gene Expression")+
+			geom_vline(xintercept=)
 
 		if(dfn[which.max(dfn$n),]$sample > 2.5) {
 			p = p + annotate(
@@ -235,6 +263,25 @@ for (thisSample in sampleList$sampleID) {
 maxGene <- max(dfSamples$sample)
 maxVarGene<-dfSamples[which.max(dfSamples$sample),]$Gene
 variationOfMax <- round(maxGene- mean(dfSamples$sample),3) 
+
+pctl <- data.frame(outlierResults %>% group_by(sampleID) %>% summarize(global95 = quantile(sample, 0.95)))
+
+dfSamples <- left_join(dfSamples, pctl, by="sampleID")
+
+dfSamples %>% arrange((global95))
+
+dfSamples$TH01
+
+facetBigPlot <- ggplot(dfSamples, aes(sample)) + geom_histogram(binwidth=0.1) +
+	ggtitle(paste0("Samples All | maxGene: ", maxVarGene, " | Distance From Mean: ", variationOfMax)) +
+	xlab("log2(TPM+1)") + ylab("Gene Expression")+
+	scale_x_continuous(limits = c(0,20)) +
+	scale_y_continuous(limits = c(0,200)) +
+	facet_wrap(~ global95)
+
+
+ggsave(filename = "facetWrap2.png", facetBigPlot,
+       width = 20, height = 20, dpi = 300, units = "in", device='png', paste0(liamsWorkingDir, "BatchPlotsMostVar-Below-p15"))
 
 ggplot(dfSamples %>% filter(sampleID == best85pctSamples$sampleID), aes(sample)) +
 	geom_histogram(binwidth=0.1) +

@@ -270,18 +270,19 @@ dfSamples <- left_join(dfSamples, pctl, by="sampleID")
 
 dfSamples %>% arrange((global95))
 
-dfSamples$TH01
+dfSamples$TH01 <- grepl("TH01", dfSamples$sampleID)
 
-facetBigPlot <- ggplot(dfSamples, aes(sample)) + geom_histogram(binwidth=0.1) +
+facetBigPlot <- ggplot(dfSamples, aes(sample, fill= TH01)) + geom_histogram(binwidth=0.1) +
 	ggtitle(paste0("Samples All | maxGene: ", maxVarGene, " | Distance From Mean: ", variationOfMax)) +
 	xlab("log2(TPM+1)") + ylab("Gene Expression")+
 	scale_x_continuous(limits = c(0,20)) +
-	scale_y_continuous(limits = c(0,200)) +
+	scale_y_continuous(limits = c(0,100)) +
+	scale_fill_brewer(palette = "Set1") +
 	facet_wrap(~ global95)
 
 
-ggsave(filename = "facetWrap2.png", facetBigPlot,
-       width = 20, height = 20, dpi = 300, units = "in", device='png', paste0(liamsWorkingDir, "BatchPlotsMostVar-Below-p15"))
+ggsave(filename = "facetWrapColored3.png", facetBigPlot,
+       width = 20, height = 20, dpi = 150, units = "in", device='png', paste0(liamsWorkingDir))
 
 ggplot(dfSamples %>% filter(sampleID == best85pctSamples$sampleID), aes(sample)) +
 	geom_histogram(binwidth=0.1) +

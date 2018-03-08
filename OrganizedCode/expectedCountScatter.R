@@ -50,8 +50,13 @@ percentileOfEachTPMSampleDf <- rawTPMDf %>%
 	group_by(sampleID) %>% 
 	summarize(p95q = quantile(TPM, 0.95), p95e_c = quantile(expected_count, 0.95))
 
+conversionEnsmblGeneID<- read_tsv("gene-DAVID-EnsembleID-Convert.txt", col_types = cols(), col_names=TRUE)
 
-rawTPMDf %>% filter(Gene == mostVariableGenes)
+rawTPM
+
+rawTPMDf %>% gsub(".[0-9]","",gene_id) %>% filter(gene_id %in% conversionEnsmblGeneID$To)
+
+rawTPMDf <- gsub("[0-9].[0-9]", "[0-9]",rawTPMDf$gene_id)
 
 thisSample <- NULL
 order <- 0
@@ -78,22 +83,53 @@ ggplot(percentileOfEachTPMSampleDf, aes(p95q, p95e_c/1000)) + geom_point() + geo
 			round(cor(percentileOfEachTPMSampleDf$p95q, percentileOfEachTPMSampleDf$p95e_c),3)
 
 		))
-dfVarSamples <- rawTPMDf %>% group_by(sampleID) %>% filter(Gene %in% geneList$Gene)
+
+# NOOO lookup gene id in tpm df and use tpm to get 1000 most var genes
+
+	# dfVarTPM <- rawTPMDf %>% mutate(TPMlog2 = log2(TPM+1))
+
+	# samp <- data.frame(outlierResults %>% select(sample, sampleID))
+
+	# dfVarTPM <- left_join(dfVarTPM, samp, by="sampleID")
+
+	# dfSamples %>% arrange((global95))
+
+	# dfSamples$TH01 <- grepl("TH01", dfSamples$sampleID)
+
+	# # dfVarSamples <- dfVarTPM %>% group_by(sampleID) %>% filter(TPMlog2 %in% outlierResults$sample)
+	# dfCollected<- data.frame(dfVarTPM,outlierResults$sample)
+
+#  variance
+dfGeneVar <- rawTPMDf %>%
+	group_by(gene_id) %>%
+	summarize(variation = var(TPM)) %>%
+	arrange(desc(variation))
+
+geneList <- dfGeneVar %>% filter(variation > quantile(dfGeneVar$variation, 0.95))
+# get names of genes p95 of variation and up
+
+dfPercentile <- rawTPMDf %>%
+	group_by(gene_id) %>%
+	summarize(p95 = quantile(TPM, 0.95))
+
+dfSamples <-
+		rawTPMDf %>% group_by(gene_id) %>% filter(gene_id %in% geneList$gene_id)
+	# match names to all of their ESN001, ESN0032 etc...
+
+
 x <- list()
 for (thisSample in worst15pctSamples$sampleID) {
 	print(thisSample)
 	dfi <- rawTPMDf %>% filter(sampleID == paste0(thisSample,'.results'))
-	mart <- useDataset("hsapiens_gene_ensembl", useMart("ensembl"))
-	genes <- dfi$gene_id
-	dfi<-dfi[,-4]
-	G_list <- getBM(filters= "ensembl_peptide_id", attributes= c("ensembl_peptide_id","hgnc_symbol"),values=genes,mart= mart)
-	merge(dfi,G_list,by.x="gene",by.y="ensembl_peptide_id")
 
-	
-	p<- ggplot(dfi) +
-		geom_histogram(aes(expected_count), binwidth=1)+
-		ggtitle(thisSample)
-	ggsave(filename = paste0("Expected-count-",thisSample,".png"), p,
-       width = 2, height = 2, dpi = 150, units = "in", device='png', paste0(liamsWorkingDir, "Batch-expectedCount"))
+
+	p<-ggplot(dfi,aes(expected_count/1000)) +
+		geom_histogram(binwidth=1)+
+		ggtitle(thisSample) +
+		scale_x_continuous(limits=c(0,5000))+
+		scale_y_continuous(limits=c(0,100)) +
+		xlab("Expected Count (Thousands)") + ylab("Frequency")
+
+	ggsave(filename = paste0("Expected-count-",thisSample,".png"), p, device='png', paste0(liamsWorkingDir, "Batch-expectedCount"))
 
 }

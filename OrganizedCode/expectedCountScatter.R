@@ -109,8 +109,9 @@ geneList <- dfGeneVar %>% filter(variation > quantile(dfGeneVar$variation, 0.95)
 # get names of genes p95 of variation and up
 
 dfPercentile <- rawTPMDf %>%
-	group_by(gene_id) %>%
-	summarize(p95 = quantile(TPM, 0.95))
+	group_by(sampleID) %>%
+	summarize(p95 = quantile(TPM, 0.95)) %>%
+	arrange(desc(p95))
 
 dfSamples <-
 		rawTPMDf %>% group_by(gene_id) %>% filter(gene_id %in% geneList$gene_id)
@@ -118,18 +119,18 @@ dfSamples <-
 
 
 x <- list()
-for (thisSample in worst15pctSamples$sampleID) {
+for (thisSample in dfPercentile$sampleID) {
 	print(thisSample)
-	dfi <- rawTPMDf %>% filter(sampleID == paste0(thisSample,'.results'))
+	dfi <- rawTPMDf %>% filter(sampleID == thisSample)
 
-
+	percentileDf <- dfPercentile %>% filter(sampleID == thisSample)
 	p<-ggplot(dfi,aes(expected_count/1000)) +
-		geom_histogram(binwidth=1)+
-		ggtitle(thisSample) +
-		scale_x_continuous(limits=c(0,5000))+
-		scale_y_continuous(limits=c(0,100)) +
+		geom_histogram(binwidth=0.1)+
+		ggtitle(paste0(thisSample, " p95: (TPM) ", round(percentileDf$p95,4))) +
+		scale_y_continuous(limits = c(0,100)) +
+		scale_x_continuous(limits = c(0,200)) +
 		xlab("Expected Count (Thousands)") + ylab("Frequency")
 
-	ggsave(filename = paste0("Expected-count-",thisSample,".png"), p, device='png', paste0(liamsWorkingDir, "Batch-expectedCount"))
+	ggsave(filename = paste0("Expected-count-",round(percentileDf$p95,4),thisSample,".png"), p, device='png', paste0(liamsWorkingDir, "Batch-expectedCount"))
 
 }

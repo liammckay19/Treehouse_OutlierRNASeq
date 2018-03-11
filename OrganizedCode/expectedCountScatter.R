@@ -17,10 +17,10 @@ rawTPMDf<-lapply(sample_file_list, function(x) {
 		})  %>%
 		bind_rows()
 
-liamsWorkingDir <-
-	"~/Documents/UCSC/Junior/Treehouse/Treehouse_OutlierRNASeq/"
+getwd() <-
+	
 
-setwd(paste0(liamsWorkingDir, "comp4.3_tert8.ckcc.outlier_results"))
+setwd(paste0(getwd(), "comp4.3_tert8.ckcc.outlier_results"))
 
 up_outlier_files = list.files(, "outlier_results_")
 
@@ -39,10 +39,10 @@ worst15pctSamples <-
 	nfpDF %>% filter(nfp < fifteenth) %>% arrange(desc(nfp))
 
 
-liamsWorkingDir <-
-	"~/Documents/UCSC/Junior/Treehouse/Treehouse_OutlierRNASeq/"
+getwd() <-
+	
 
-setwd(paste0(liamsWorkingDir))
+setwd(paste0(getwd()))
 
 mostVariableGenes <- read_tsv("JVB TH_log2tpm_variable_genes.txt", col_types = cols(), col_names=c("Gene")) 
 
@@ -131,6 +131,6 @@ for (thisSample in dfPercentile$sampleID) {
 		scale_x_continuous(limits = c(0,200)) +
 		xlab("Expected Count (Thousands)") + ylab("Frequency")
 
-	ggsave(filename = paste0("Expected-count-",round(percentileDf$p95,4),thisSample,".png"), p, device='png', paste0(liamsWorkingDir, "Batch-expectedCount"))
+	ggsave(filename = paste0("Expected-count-",round(percentileDf$p95,4),thisSample,".png"), p, device='png', paste0(getwd(), "Batch-expectedCount"))
 
 }

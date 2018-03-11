@@ -123,6 +123,19 @@ ggplot(dfScatter,aes(n/1000,p95, color = Sample_Name)) +
     )
   )
 
+dfScatter$shortSampleID <- gsub('[_][0-9S]+','',dfScatter$sampleID)
+i<-1
+corlist<-set()
+for(sampleCenter in dfScatter$shortSampleID){
+	print(sampleCenter)
+	dfab <- dfScatter %>% filter(shortSampleID == sampleCenter)
+	corlist[[i]] <- cor(dfab$n, dfab$p95)
+	i <- i+ 1
+}
+
+g <- dfScatter$shortSampleID
+correlations<-list(split(unique(dfScatter$shortSampleID), g),unique(corlist))
+list(unique(dfScatter$shortSampleID))
 
 ggplot(dfScatter,aes(n/1000,p95)) + 
   scale_colour_brewer(type = "seq", palette = "Set1", direction = 1)+

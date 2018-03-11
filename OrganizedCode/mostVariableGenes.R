@@ -6,10 +6,10 @@ options(stringsAsFactors=FALSE) # for compatibile code between us
 library(tidyverse)
 
 
-liamsWorkingDir <-
+getwd() <-
   "~/Documents/UCSC/Junior/Treehouse/Treehouse_OutlierRNASeq/"
 
-setwd(paste0(liamsWorkingDir, "comp4.3_tert8.ckcc.outlier_results"))
+setwd(paste0(getwd(), "comp4.3_tert8.ckcc.outlier_results"))
 
 up_outlier_files=list.files(, "outlier_results_")
 
@@ -112,7 +112,7 @@ for (thisSample in sampleList$sampleID) {
 		),
 		plot = p,
 		"png",
-		paste0(liamsWorkingDir, "Batch-MostVariantGenesSorted-by-p95")
+		paste0(getwd(), "Batch-MostVariantGenesSorted-by-p95")
 	)
 
 }
@@ -180,7 +180,7 @@ for (thisSample in sampleList$sampleID) {
 			),
 			plot = p,
 			"png",
-			paste0(liamsWorkingDir, "BatchPlotsMostVar-Below-p15")
+			paste0(getwd(), "BatchPlotsMostVar-Below-p15")
 		)
 		
 	}
@@ -252,7 +252,7 @@ for (thisSample in sampleList$sampleID) {
 			),
 			plot = p,
 			"png",
-			paste0(liamsWorkingDir, "BatchPlotsMostVar-Above-p95")
+			paste0(getwd(), "BatchPlotsMostVar-Above-p95")
 		)
 		
 	}
@@ -282,7 +282,7 @@ facetBigPlot <- ggplot(dfSamples, aes(sample, fill= TH01)) + geom_histogram(binw
 
 
 ggsave(filename = "facetWrapColored3.png", facetBigPlot,
-       width = 20, height = 20, dpi = 150, units = "in", device='png', paste0(liamsWorkingDir))
+       width = 20, height = 20, dpi = 150, units = "in", device='png', paste0(getwd()))
 
 ggplot(dfSamples %>% filter(sampleID == best85pctSamples$sampleID), aes(sample)) +
 	geom_histogram(binwidth=0.1) +

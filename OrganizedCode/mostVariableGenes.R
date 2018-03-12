@@ -67,6 +67,7 @@ dfSamples$TH01 <- gsub('TRUE', 'blue',dfSamples$TH01)
 dfSamples$TH01 <- gsub('FALSE', 'red',dfSamples$TH01)
 
 
+
 sampleList <- dfSamples %>%
 	select(sampleID,sample) %>%
 	group_by(sampleID) %>%
@@ -259,6 +260,15 @@ for (thisSample in sampleList$sampleID) {
 	averageBump = sumBump / countBump
 	print(averageBump)
 }
+nfpDF <-
+		dfSamples %>% group_by(sampleID) %>% summarize(nfp = quantile(sample, 0.95))
+	
+eightyFive = quantile(nfpDF$nfp, 0.85)
+best85pctSamples <-
+	nfpDF %>% filter(nfp > eightyFive) %>% arrange(desc(nfp))
+fifteenth = quantile(nfpDF$nfp, 0.15)
+worst15pctSamples <-
+	nfpDF %>% filter(nfp < fifteenth) %>% arrange(desc(nfp))
 
 maxGene <- max(dfSamples$sample)
 maxVarGene<-dfSamples[which.max(dfSamples$sample),]$Gene
@@ -286,8 +296,10 @@ ggsave(filename = "facetWrapColored3.png", facetBigPlot,
 
 ggplot(dfSamples %>% filter(sampleID == best85pctSamples$sampleID), aes(sample)) +
 	geom_histogram(binwidth=0.1) +
-	ggtitle(paste0("Samples > p85 | maxGene: ", maxVarGene, " | Distance From Mean: ", variationOfMax)) +
-	xlab("log2(TPM+1)") + ylab("Gene Expression")+
+	ggtitle(paste0("Highest 22 p95s | maxVarGene: ", maxVarGene, " | Distance From Mean: ", variationOfMax)) +
+	xlab("log2(TPM+1)") + ylab("Gene Expression")+	
+	scale_x_continuous(limits = c(0,17)) +
+	scale_y_continuous(limits = c(0,20)) +
 	facet_wrap(~ sampleID)
 
 dfBadSamples <- dfSamples %>% filter(sampleID == worst15pctSamples$sampleID)
@@ -297,6 +309,8 @@ variationOfMax <- round(maxGene- mean(dfBadSamples$sample),3)
 
 ggplot(dfBadSamples, aes(sample)) +
 	geom_histogram(binwidth=0.1) +
-	ggtitle(paste0("Samples < p15 | maxGene: ", maxVarGene, " | Distance From Mean: ", variationOfMax)) +
+	ggtitle(paste0("Lowest 22 p95s | maxVarGene: ", maxVarGene, " | Distance From Mean: ", variationOfMax)) +
 	xlab("log2(TPM+1)") + ylab("Gene Expression")+
+	scale_x_continuous(limits = c(0,17)) +
+	scale_y_continuous(limits = c(0,20)) +
 	facet_wrap(~ sampleID)

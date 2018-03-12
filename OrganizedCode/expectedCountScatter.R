@@ -56,7 +56,7 @@ rawTPMDf %>% gsub(".[0-9]","",gene_id) %>% filter(gene_id %in% conversionEnsmblG
 rawTPMDf <- gsub("[0-9].[0-9]", "[0-9]",rawTPMDf$gene_id)
 
 ggplot(percentileOfEachTPMSampleDf, aes(p95q, p95e_c/1000)) + geom_point() + geom_smooth(method = 'lm')  +
-	ggtitle("95th Pctl Expected Count of Samples vs. 95th Pctl TPM of Samples") +
+	ggtitle("Upper Normalized Measured Read Counts vs. Upper Expected Read Counts") +
 	xlab("Sample's 95th Percentile of TPM Values") + ylab("Sample's 95th Percentile of Expected Count (Thousands)")+
 	annotate(
 		"text",

@@ -17,7 +17,7 @@ rawTPMDf<-lapply(sample_file_list, function(x) {
 		})  %>%
 		bind_rows()
 
-getwd() <-
+
 	
 
 setwd(paste0(getwd(), "comp4.3_tert8.ckcc.outlier_results"))
@@ -50,26 +50,10 @@ percentileOfEachTPMSampleDf <- rawTPMDf %>%
 	group_by(sampleID) %>% 
 	summarize(p95q = quantile(TPM, 0.95), p95e_c = quantile(expected_count, 0.95))
 
-conversionEnsmblGeneID<- read_tsv("gene-DAVID-EnsembleID-Convert.txt", col_types = cols(), col_names=TRUE)
-
-rawTPM
 
 rawTPMDf %>% gsub(".[0-9]","",gene_id) %>% filter(gene_id %in% conversionEnsmblGeneID$To)
 
 rawTPMDf <- gsub("[0-9].[0-9]", "[0-9]",rawTPMDf$gene_id)
-
-thisSample <- NULL
-order <- 0
-sumBump <- 0
-countBump <- 0 
-averageBump <- 0 
-
-
-# https://stackoverflow.com/questions/28543517/how-can-i-convert-ensembl-id-to-gene-symbol-in-r
-source("http://bioconductor.org/biocLite.R")
-biocLite("biomaRt")
-library('biomaRt')
-
 
 ggplot(percentileOfEachTPMSampleDf, aes(p95q, p95e_c/1000)) + geom_point() + geom_smooth(method = 'lm')  +
 	ggtitle("95th Pctl Expected Count of Samples vs. 95th Pctl TPM of Samples") +
@@ -84,20 +68,64 @@ ggplot(percentileOfEachTPMSampleDf, aes(p95q, p95e_c/1000)) + geom_point() + geo
 
 		))
 
-# NOOO lookup gene id in tpm df and use tpm to get 1000 most var genes
+percentileOfEachTPMSampleDf$shortSampleID <- gsub('.results','',percentileOfEachTPMSampleDf$sampleID)
 
-	# dfVarTPM <- rawTPMDf %>% mutate(TPMlog2 = log2(TPM+1))
+percentileOfEachTPMSampleDf$shortSampleID <- gsub('[_][0-9S]+','',percentileOfEachTPMSampleDf$shortSampleID)
+percentileOfEachTPMSampleDf$Method <- gsub('[TH02-9]+[^TH01]', 'PolyA', percentileOfEachTPMSampleDf$shortSampleID)
+percentileOfEachTPMSampleDf$Method <- gsub('TH01', 'RiboD', percentileOfEachTPMSampleDf$Method)
+i<-1
+corlist<-list(0)
+for(sampleCenter in unique(percentileOfEachTPMSampleDf$shortSampleID)){
+  print(sampleCenter)
+  dfab <- percentileOfEachTPMSampleDf %>% filter(shortSampleID == sampleCenter)
+  corlist[[i]] <- round(cor(dfab$p95q, dfab$p95e_c),4)
+  i <- i+ 1
+}
 
-	# samp <- data.frame(outlierResults %>% select(sample, sampleID))
+correlations<-data.frame(sampleID = unique(percentileOfEachTPMSampleDf$shortSampleID))
+correlations$cor <- unique(corlist)
+resultsCorrelations <- paste((paste0(correlations$sampleID, ": ", correlations$cor, "; \n")), collapse = '')
 
-	# dfVarTPM <- left_join(dfVarTPM, samp, by="sampleID")
 
-	# dfSamples %>% arrange((global95))
+ggplot(percentileOfEachTPMSampleDf, aes(p95q, p95e_c/1000, color=shortSampleID)) + geom_point() + geom_smooth(method = 'lm')  +
+	ggtitle("95th Pctl Expected Count of Samples vs. 95th Pctl TPM of Samples") +
+	xlab("Sample's 95th Percentile of TPM Values") + ylab("Sample's 95th Percentile of Expected Count (Thousands)")+
+	annotate(
+		"text",
+		x = 12,
+		y = 8,
+		label = paste0(
+			"correlation: \n",
+			resultsCorrelations
 
-	# dfSamples$TH01 <- grepl("TH01", dfSamples$sampleID)
+		))
 
-	# # dfVarSamples <- dfVarTPM %>% group_by(sampleID) %>% filter(TPMlog2 %in% outlierResults$sample)
-	# dfCollected<- data.frame(dfVarTPM,outlierResults$sample)
+
+i<-1
+corlistM<-list(0)
+for(method in unique(percentileOfEachTPMSampleDf$Method)){
+  print(method)
+  dfab <- percentileOfEachTPMSampleDf %>% filter(Method == method)
+  corlistM[[i]] <- round(cor(dfab$p95q, dfab$p95e_c),4)
+  i <- i+ 1
+}
+
+correlationsM<-data.frame(method = unique(percentileOfEachTPMSampleDf$Method))
+correlationsM$corMethod <- corlistM
+resultsCorrelationsM <- paste((paste0(correlationsM$method, ": ", correlationsM$corMethod, "; \n")), collapse = '')
+ggplot(percentileOfEachTPMSampleDf, aes(p95q, p95e_c/1000, color=Method)) + geom_point() + geom_smooth(method = 'lm')  +
+	ggtitle("95th Pctl Expected Count of Samples vs. 95th Pctl TPM of Samples") +
+	xlab("Sample's 95th Percentile of TPM Values") + ylab("Sample's 95th Percentile of Expected Count (Thousands)")+
+	annotate(
+		"text",
+		x = 12,
+		y = 8,
+		label = paste0(
+			"correlation: \n",
+			resultsCorrelationsM
+
+		))
+
 
 #  variance
 dfGeneVar <- rawTPMDf %>%

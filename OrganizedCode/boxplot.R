@@ -37,7 +37,28 @@ dfBox <- dfNotZeros
 dfBox$Method = grepl("TH01", p95df$sampleID)
 dfBox$Method <- gsub("TRUE", "Ribo-depletion(TH01)",dfBox$Method)
 dfBox$Method <- gsub("FALSE", "PolyA-selection(Not TH01)",dfBox$Method)
+riboDepleted <- filter(dfBox, Method=="Ribo-depletion(TH01)")
+polyaSelected <- filter(dfBox, Method=="PolyA-selection(Not TH01)")
 
+ggplot(dfBox, aes(x=Method, y=p95)) + geom_boxplot()+
+	ylab('95th Percentile Per Sample') + xlab('Method') +
+	ggtitle('Ribo-depletion and PolyA-selection 95th Percentile Values') 
+
+t.test(riboDepleted$p95, polyaSelected$p95,
+       alternative = "two.sided",
+       mu = 0, paired = FALSE, var.equal = FALSE,
+       conf.level = 0.95)
+
+# Welch Two Sample t-test
+
+# data:  riboDepleted$p95 and polyaSelected$p95
+# t = -5.3986, df = 24.118, p-value = 1.496e-05
+# alternative hypothesis: true difference in means is not equal to 0
+# 95 percent confidence interval:
+#  -1.2779641 -0.5712024
+# sample estimates:
+# mean of x mean of y 
+#  4.374965  5.299548 
 
 ggplot(dfBox, aes(x=Method, y=n/1000)) + geom_boxplot()+
 	ylab('Expressed Genes (Thousands)') + xlab('Method') +
@@ -76,8 +97,6 @@ ggplot(dfBox, aes(x=Method, y=n/1000)) + geom_boxplot()+
 	)
 
 
-riboDepleted <- filter(dfBox, Method=="Ribo-depletion(TH01)")
-polyaSelected <- filter(dfBox, Method=="PolyA-selection(Not TH01)")
 t.test(riboDepleted$n, polyaSelected$n,
        alternative = "two.sided",
        mu = 0, paired = FALSE, var.equal = FALSE,
@@ -113,6 +132,9 @@ t.test(riboDepleted$n, polyaSelected$n,
        alternative = "two.sided",
        mu = 5, paired = FALSE, var.equal = TRUE,
        conf.level = 0.95)
+
+
+
 
 # REFERENCE
 x <- seq(1,5)

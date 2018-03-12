@@ -49,19 +49,30 @@ UMENDp95DFOther <- UMENDp95DF %>% filter(Sample == F)
 UMENDp95DF$Sample <- gsub("TRUE", "TH01_[Ribo]...",UMENDp95DF$Sample)
 UMENDp95DF$Sample <- gsub("FALSE", "Not TH01_[PolyA]...",UMENDp95DF$Sample)
 
-ggplot(UMENDp95DF, aes(p95, rawUMEND, color = Sample)) + geom_point() +
+UMENDp95DF$shortSampleID <- gsub('[_][0-9S]+','',UMENDp95DF$sampleID)
+i<-1
+corlist<-list(0)
+for(sampleCenter in UMENDp95DF$shortSampleID){
+  print(sampleCenter)
+  dfab <- UMENDp95DF %>% filter(shortSampleID == sampleCenter)
+  corlist[[i]] <- round(cor(dfab$rawUMEND, dfab$p95),4)
+  i <- i+ 1
+}
+
+correlations<-data.frame(sampleID = unique(UMENDp95DF$shortSampleID))
+correlations$cor <- unique(corlist)
+resultsCorrelations <- paste((paste0(correlations$sampleID, ": ", correlations$cor, "; \n")), collapse = '')
+
+
+ggplot(UMENDp95DF, aes(p95, rawUMEND, color = shortSampleID)) + geom_point() +
   ylab("Raw UMEND Count") + xlab("95th Percentile Per Sample") + 
   geom_smooth(method = 'lm', level = 0.95, se = TRUE) +
-  ggtitle("[Ribo-D / PolyA-S] 95th Percentile vs. UMEND Reads Per Sample") + 
+  ggtitle("95th Percentile vs. UMEND Reads Per Sample") + 
   annotate(
     "text",
     x = 3,
     y = 7e+07,
-    label = paste0(
-      "correlation TH01 [Ribo-D]: ",
-      round(cor(UMENDp95DFTH01$rawUMEND,UMENDp95DFTH01$p95),3),
-      "\ncorrelation Not TH01 [PolyA-S]: ",
-      round(cor(UMENDp95DFOther$rawUMEND,UMENDp95DFOther$p95),3)
+    label = paste0("correlations:\n", resultsCorrelations)
       
     )
   )

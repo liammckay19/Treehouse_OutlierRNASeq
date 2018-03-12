@@ -125,21 +125,26 @@ ggplot(dfScatter,aes(n/1000,p95, color = Sample_Name)) +
 
 dfScatter$shortSampleID <- gsub('[_][0-9S]+','',dfScatter$sampleID)
 i<-1
-corlist<-set()
+corlist<-list(0)
 for(sampleCenter in dfScatter$shortSampleID){
 	print(sampleCenter)
 	dfab <- dfScatter %>% filter(shortSampleID == sampleCenter)
-	corlist[[i]] <- cor(dfab$n, dfab$p95)
+	corlist[[i]] <- round(cor(dfab$n, dfab$p95),4)
 	i <- i+ 1
 }
 
-g <- dfScatter$shortSampleID
-correlations<-list(split(unique(dfScatter$shortSampleID), g),unique(corlist))
-list(unique(dfScatter$shortSampleID))
+correlations<-data.frame(sampleID = unique(dfScatter$shortSampleID))
+correlations$cor <- unique(corlist)
 
-ggplot(dfScatter,aes(n/1000,p95)) + 
-  scale_colour_brewer(type = "seq", palette = "Set1", direction = 1)+
-  scale_fill_brewer(type = "seq", palette = "Set1", direction = 1)+
+for (i in seq(1,4)){
+	paste0()
+}
+
+
+resultsCorrelations <- paste((paste0(correlations$sampleID, ": ", correlations$cor, "; \n")), collapse = '')
+ggplot(dfScatter,aes(n/1000,p95, color = shortSampleID)) + 
+  scale_colour_brewer(palette = "Set1")+
+  scale_fill_brewer(palette = "Set1")+
   geom_point() +
   scale_size_continuous(range = c(1,6))+
   geom_smooth(method = 'lm')+
@@ -147,13 +152,9 @@ ggplot(dfScatter,aes(n/1000,p95)) +
     "text",
     x = 30,
     y = 2.5 ,
-    label = paste0(
-      "correlation : ",
-      round(cor(dfScatter$n,dfScatter$p95),3)
-      
-    )
-  ) +
-  xlab('Expressed Genes (Thousands)') + lab('95th Percentile per Sample') +
+    label = paste0("correlations\n",resultsCorrelations)
+    )+
+  xlab('Expressed Genes (Thousands)') + ylab('95th Percentile per Sample') +
   ggtitle('Each Sample\'s Count of Expressed Genes and its 95th Percentile') 
 
 

@@ -185,9 +185,7 @@ ggplot(outlierResults %>% filter(sampleID == best85pctSamples$sampleID), aes(sam
 
 		p <- ggplot(outlierResults %>% filter(sampleID == thisSample)) +
 			geom_histogram(aes(sample), binwidth = 0.1) +
-			ggtitle(thisSample) +
-			scale_x_continuous(limits = c(0, 20)) +
-			scale_y_continuous(limits = c(0, 2000)) 
+			ggtitle(thisSample) + xlab("log2(TPM+1)")
 
 
 		if(dfn[which.max(dfn$n),]$sample > 1.9) {
@@ -203,7 +201,7 @@ ggplot(outlierResults %>% filter(sampleID == best85pctSamples$sampleID), aes(sam
 			sumBump = sumBump + dfn[which.max(dfn$n),]$sample
 			countBump = countBump + 1
 		}
-	}
+	
 
 		order = order + 1
 		ggsave(
@@ -217,7 +215,7 @@ ggplot(outlierResults %>% filter(sampleID == best85pctSamples$sampleID), aes(sam
 			),
 			plot = p,
 			"png",
-			paste0(liamsWorkingDir, "bumpPlots")
+			paste0(liamsWorkingDir, "BatchUnexpressionPlots")
 		)
 	}
 	averageBump = sumBump / countBump

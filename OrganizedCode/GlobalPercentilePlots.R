@@ -1,5 +1,5 @@
 
-
+# PLOT low and high 95th percentiles
 
 options(stringsAsFactors = FALSE) # for compatibile code between us
 
@@ -102,22 +102,9 @@ percentileOfEachSampleDf <- outlierResults %>%
 }
 
 
-ggplot(p95p75, aes(sample, fill = percentile)) +
-  geom_histogram(
-    alpha = 0.5,
-    position = 'identity',
-    aes(y = ..density.., color = percentile),
-    binwidth = 0.1
-  ) +
-  ggtitle("Frequency of Global 75th and 95th Percentile of Each Sample") +
-  geom_density(alpha = 0,
-               position = 'identity',
-               aes(y = ..density..)) +
-  xlab("log2(TPM+1) Pctl Cutoff \nof Each Sample") +
-  ylab("Density of Measurements") +
-  scale_y_continuous(limits = c(0, 1.5)) +
-  scale_x_continuous(limits = c(0, 6.5)) +
-  geom_vline(xintercept = 5.24) + annotate("text", x = 4.4, y = 1, label = "log2(TPM+1) = 5.24")
+# ==============================================================================================
+#   high and low 95th percentiles
+# ==============================================================================================
 
 ggplot(percentileOfEachSampleDf, aes(p95)) +
   geom_histogram(
@@ -130,8 +117,27 @@ ggplot(percentileOfEachSampleDf, aes(p95)) +
   geom_density(alpha = 0,
                position = 'identity',
                aes(y = ..density..)) +
-  xlab("95th Percentile") +
-  ylab("Density of Measurements")
+  xlab("95th Pctl Cutoff of Each Sample\nUnits: log2(TPM+1)") +
+  ylab("How Many Samples")
+
+
+
+ggplot(p95p75, aes(sample, fill = percentile)) +
+  geom_histogram(
+    alpha = 0.5,
+    position = 'identity',
+    aes(y = ..density.., color = percentile),
+    binwidth = 0.1
+  ) +
+  ggtitle("Frequency of Global 75th and 95th Percentile of Each Sample") +
+  geom_density(alpha = 0,
+               position = 'identity',
+               aes(y = ..density..)) +
+  xlab("log2(TPM+1) Pctl Cutoff \nof Each Sample") +
+  ylab("How Many Samples Had This Value") +
+  scale_y_continuous(limits = c(0, 1.5)) +
+  scale_x_continuous(limits = c(0, 6.5)) +
+  geom_vline(xintercept = 5.24) + annotate("text", x = 4.4, y = 1, label = "log2(TPM+1) = 5.24")
 
 
 m <- ggplot(percentileOfEachSampleDf, aes(p95))

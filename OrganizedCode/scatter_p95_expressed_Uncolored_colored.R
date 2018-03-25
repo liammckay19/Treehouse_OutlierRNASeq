@@ -20,6 +20,7 @@ outlierResults<-lapply(up_outlier_files, function(x) {
 }) 	%>%
   bind_rows()
 
+data.frame(outlierResults$sample, outlierResults$sampleID)
 
 # every sample in the dataset's bump plotted and saved: 
 {
@@ -94,8 +95,8 @@ dfNotZeros$TH01 = grepl("TH01", p95df$sampleID)
 dfTH01s <- dfNotZeros %>% filter(TH01 == T)
 dfNotTH01s <- dfNotZeros %>% filter(TH01 == F)
 
-dfNotZeros$TH01 <- gsub("TRUE", "TH01_...",dfNotZeros$TH01)
-dfNotZeros$TH01 <- gsub("FALSE", "Not TH01_...",dfNotZeros$TH01)
+dfNotZeros$TH01 <- gsub("TRUE", "RiboMinus",dfNotZeros$TH01)
+dfNotZeros$TH01 <- gsub("FALSE", "PolyA",dfNotZeros$TH01)
 
 
 dfScatter <- dfNotZeros 

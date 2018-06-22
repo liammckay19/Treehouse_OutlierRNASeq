@@ -17,7 +17,6 @@ Current findings:
 
 
 How to use this repository to generate my graphs:
-- put ckcc_rsem_genes_results and comp4.3_tert8.ckcc.outlier_results folders in the same level as this README
 - for all scatterplots (including grouping by TH0#) go to scatterplotsUMEND-NumOfExprGene-p95.ipynb
 - to get animated histograms use animationPlots.ipynb
 - to create expected count scatter plot against number of expressed genes, use expectedCountScatter.ipynb

@@ -2,7 +2,7 @@
 ## https://docs.google.com/presentation/d/1CQoIRCnTSLGydnxKiOXGFSrRBvqd_PYEHHUd6kU-9Jg/edit?usp=sharing
 Undergraduate research project for the Treehouse Initiative by Liam McKay (undergrad) and Holly Beale (mentor)
 
-Used cohort CKCC 146 Samples
+Used cohort CKCC1 146 Samples
 All TH01 samples are Ribosomal RNA Depleted (RiboD)
 TH02,3,4,6 are Polyadenylated RNA Selection (PolyA-S)
 
@@ -18,8 +18,14 @@ Current findings:
 
 How to use this repository to generate my graphs:
 - put ckcc_rsem_genes_results and comp4.3_tert8.ckcc.outlier_results folders in the same level as this README
-- for all scatterplots (including grouping by TH0#) go to scatterplotsUMEND-NumOfExprGene-p95.R
+- for all scatterplots (including grouping by TH0#) go to scatterplotsUMEND-NumOfExprGene-p95.ipynb
+- to get animated histograms use animationPlots.ipynb
+- to create expected count scatter plot against number of expressed genes, use expectedCountScatter.ipynb
+- global percentile plots are in GlobalPercentilePlots.ipynb
 
+
+
+R code documentation:
 - for all histograms use 
 - single plot histogram: singleSamplePlot.R
 - high and low 95th percentiles: GlobalPercentilePlots.R
